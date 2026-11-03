@@ -2,81 +2,81 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>elhackerleo</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="css/estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Descargas</title>
     <style>
         body {
-            background-image: url('fondo.png.jpg') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
         }
         .contenedor-login {
-            background-color: rgba(20, 27, 38, 0.95);
+            background-color: #161b22;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             text-align: center;
-            color: #ffffff;
             width: 320px;
         }
         .avatar-circular {
-            width: 120px;          
-            height: 120px;         
-            border-radius: 50%;    
-            object-fit: cover;     
-            margin-bottom: 15px;   
-            border: 2px solid #00bcff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
-        h3 { margin: 5px 0; color: #00bcff; }
-        p { margin: 5px 0 15px 0; color: #aaaaaa; font-size: 14px; }
+        h3 {
+            margin: 10px 0;
+            color: #58a6ff;
+        }
         input[type="password"] {
             width: 90%;
             padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            background-color: #0f172a;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #30363d;
+            background-color: #0d1117;
             color: white;
             text-align: center;
         }
         button {
-            width: 97%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #00bcff;
+            background-color: #238636;
             color: white;
-            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            font-weight: bold;
         }
-        button:hover { background-color: #0099cc; }
-        .seccion-descargas { margin-top: 20px; text-align: left; }
+        button:hover {
+            background-color: #2ea043;
+        }
         .carpeta-link {
             display: block;
-            background-color: #1e293b;
-            color: #00bcff;
-            padding: 10px;
-            margin: 8px 0;
+            background-color: #21262d;
+            color: #58a6ff;
+            padding: 12px;
+            margin: 10px 0;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
-            text-align: center;
+            border: 1px solid #30363d;
         }
-        .carpeta-link:hover { background-color: #334155; }
+        .carpeta-link:hover {
+            background-color: #30363d;
+            color: #58a6ff;
+        }
     </style>
 </head>
 <body>
+
     <div class="contenedor-login">
+        <!-- PANTALLA DE INICIO DE SESIÓN -->
         <div id="pantallaLogin">
             <img src="logo.png" alt="Avatar" class="avatar-circular">
             <h3>elhackerleo</h3>
@@ -84,19 +84,25 @@
             <input type="password" id="inputClave" placeholder="Ingresa la clave">
             <button onclick="verificarClave()">Desbloquear</button>
         </div>
+
+        <!-- PANTALLA DE DESCARGAS (OCULTA AL INICIO) -->
         <div id="pantallaDescargas" style="display: none;">
             <img src="logo.png" alt="Avatar" class="avatar-circular">
             <h3>Panel de Descargas</h3>
             <p>Aplicaciones de Windows disponibles:</p>
+            
             <div class="seccion-descargas">
-                <!-- En la línea 95, borra el enlace de ejemplo que puse abajo y pega el tuyo presionando Ctrl + V -->
-                <a href="https://drive.google.com/file/d/1K1I8TH8-qz4p1hYNlU6AGc1k0bBA35ev/view?usp=sharing" class="carpeta-link" target="_blank">📥 Descargar Driver HP</a>
+                <a href="https://google.com" class="carpeta-link" target="_blank">🖨️ Descargar Driver HP</a>
+                <a href="SOLAMENTEOFFICEDesktopInstaller (1).exe" class="carpeta-link" download>📄 Descargar SOLAMENTE OFFICE</a>
+                <a href="wrar370es (1).exe" class="carpeta-link" download>📦 Descargar WinRAR</a>
             </div>
         </div>
     </div>
+
     <script>
         function verificarClave() {
             var password = document.getElementById('inputClave').value;
+            
             if (password === '11') {
                 document.getElementById('pantallaLogin').style.display = 'none';
                 document.getElementById('pantallaDescargas').style.display = 'block';
@@ -106,5 +112,6 @@
             }
         }
     </script>
+
 </body>
 </html>
