@@ -5,23 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Descargas</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
+            background-image: url('fondo.png'); /* Mantiene tu imagen de fondo original */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
         .contenedor-login {
-            background-color: #161b22;
+            background-color: rgba(22, 27, 34, 0.85); /* Fondo oscuro semitransparente original */
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             text-align: center;
             width: 320px;
+            backdrop-filter: blur(5px);
         }
         .avatar-circular {
             width: 80px;
@@ -33,8 +40,13 @@
             margin: 10px 0;
             color: #58a6ff;
         }
+        p {
+            color: #c9d1d9;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
         input[type="password"] {
-            width: 90%;
+            width: 100%;
             padding: 10px;
             margin: 15px 0;
             border-radius: 5px;
@@ -56,6 +68,9 @@
         button:hover {
             background-color: #2ea043;
         }
+        .seccion-descargas {
+            margin-top: 15px;
+        }
         .carpeta-link {
             display: block;
             background-color: #21262d;
@@ -66,10 +81,10 @@
             text-decoration: none;
             font-weight: bold;
             border: 1px solid #30363d;
+            text-align: center;
         }
         .carpeta-link:hover {
             background-color: #30363d;
-            color: #58a6ff;
         }
     </style>
 </head>
