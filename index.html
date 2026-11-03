@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sitio Oficial - elhackerleo</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <style>
+        /* Fondo de pantalla cibernético */
+        body {
+            background-image: url('fondo.png.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Caja de diseño central */
+        .contenedor-login {
+            background-color: rgba(20, 27, 38, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #ffffff;
+            width: 320px;
+        }
+
+        /* Logo redondo */
+        .avatar-circular {
+            width: 100px;          
+            height: 100px;         
+            border-radius: 50%;    
+            object-fit: cover;     
+            margin-bottom: 15px;   
+            border: 2px solid #00bcff;
+        }
+
+        h3 { margin: 5px 0; color: #00bcff; }
+        p { margin: 5px 0 15px 0; color: #aaaaaa; font-size: 14px; }
+
+        /* Estilos de inputs y botones */
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
+            text-align: center;
+        }
+        button {
+            width: 97%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00bcff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0099cc; }
+
+        /* Estilos para la sección de descargas */
+        .seccion-descargas {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .carpeta-link {
+            display: block;
+            background-color: #1e293b;
+            color: #00bcff;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+        .carpeta-link:hover { background-color: #334155; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-login">
+        <!-- PANTALLA DE INICIO DE SESIÓN -->
+        <div id="pantallaLogin">
+            <img src="logo.png" alt="Avatar" class="avatar-circular">
+            <h3>elhackerleo</h3>
+            <p>Contraseña requerida</p>
+            <input type="password" id="inputClave" placeholder="Ingresa la clave">
+            <button onclick="verificarClave()">Desbloquear</button>
+        </div>
+
+        <!-- PANTALLA DE DESCARGAS -->
+        <div id="pantallaDescargas" style="display: none;">
+            <img src="logo.png" alt="Avatar" class="avatar-circular">
+            <h3>Panel de Descargas</h3>
+            <p>Aplicaciones de Windows disponibles:</p>
+            
+            <div class="seccion-descargas">
+                <!-- Nombre cambiado visualmente a Driver HP -->
+                <a href="descargas/programa.exe" class="carpeta-link">📥 Descargar Driver HP</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verificarClave() {
+            var password = document.getElementById('inputClave').value;
+            if (password === '11') {
+                document.getElementById('pantallaLogin').style.display = 'none';
+                document.getElementById('pantallaDescargas').style.display = 'block';
+            } else {
+                alert('Acceso denegado. Clave incorrecta.');
+                document.getElementById('inputClave').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
