@@ -2,382 +2,513 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#050b12">
-    <title>SOPORTE JAIMES 84</title>
-    <link rel="icon" type="image/png" href="logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b12">
+<title>SOPORTE TÉCNICO</title>
+<link rel="icon" type="image/png" href="logo.png">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+*{box-sizing:border-box}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background:
-                linear-gradient(rgba(0, 8, 15, .35), rgba(0, 8, 15, .55)),
-                url('fondo.png.jpg') center center / cover fixed no-repeat;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 15px;
-            overflow-x: hidden;
-            position: relative;
-        }
+body{
+ margin:0;
+ min-height:100vh;
+ font-family:'Segoe UI',Arial,sans-serif;
+ background:
+ linear-gradient(rgba(0,8,15,.45),rgba(0,8,15,.65)),
+ url('fondo.png.jpg') center/cover fixed no-repeat;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:25px 15px;
+ overflow-x:hidden;
+ color:white;
+}
 
-        /* Efecto de iluminación */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(circle at center,
-                transparent 10%, rgba(0, 0, 0, .55) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
+body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle,transparent,rgba(0,0,0,.65));
+ pointer-events:none;
+}
 
-        .contenido {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: aparecer 1.2s ease;
-        }
+#particulas{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ overflow:hidden;
+ z-index:0;
+}
 
-        /* Título principal */
-        .titulo {
-            color: white;
-            font-family: Georgia, serif;
-            font-size: clamp(42px, 8vw, 68px);
-            font-weight: bold;
-            letter-spacing: 3px;
-            margin-bottom: 22px;
-            text-align: center;
-            text-shadow:
-                0 0 10px #00d9ff,
-                0 0 25px #008cff,
-                0 4px 10px black;
-            animation: brillo 3s infinite alternate;
-        }
+.particula{
+ position:absolute;
+ width:4px;
+ height:4px;
+ border-radius:50%;
+ background:#00eaff;
+ box-shadow:0 0 12px #00eaff;
+ animation:subir linear infinite;
+}
 
-        /* Tarjeta de acceso */
-        .contenedor-login {
-            width: 100%;
-            max-width: 370px;
-            padding: 30px;
-            text-align: center;
-            background: rgba(9, 19, 32, .91);
-            border: 1px solid rgba(0, 195, 255, .65);
-            border-radius: 18px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow:
-                0 0 15px rgba(0, 174, 255, .35),
-                0 0 45px rgba(0, 174, 255, .15),
-                0 15px 40px rgba(0, 0, 0, .7);
-            transition: .4s;
-        }
+@keyframes subir{
+ from{transform:translateY(100vh);opacity:0}
+ 20%{opacity:1}
+ to{transform:translateY(-10vh);opacity:0}
+}
 
-        .contenedor-login:hover {
-            box-shadow:
-                0 0 25px rgba(0, 195, 255, .6),
-                0 0 60px rgba(0, 100, 255, .25);
-        }
+.contenido{
+ position:relative;
+ z-index:1;
+ width:100%;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ animation:entrada 1s ease;
+}
 
-        /* Logo */
-        .avatar-circular {
-            width: 105px;
-            height: 105px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #008cff;
-            box-shadow:
-                0 0 12px #00bfff,
-                0 0 25px rgba(0, 140, 255, .5);
-            margin-bottom: 12px;
-            animation: flotar 3s ease-in-out infinite;
-        }
+@keyframes entrada{
+ from{opacity:0;transform:translateY(35px)}
+ to{opacity:1;transform:translateY(0)}
+}
 
-        h3 {
-            color: #00aaff;
-            font-size: 23px;
-            margin: 10px 0 12px;
-            text-shadow: 0 0 10px rgba(0, 150, 255, .5);
-        }
+.titulo{
+ font-family:Georgia,serif;
+ font-size:clamp(35px,7vw,65px);
+ text-align:center;
+ letter-spacing:3px;
+ margin-bottom:22px;
+ text-shadow:0 0 12px #00d9ff,0 0 35px #008cff;
+ animation:brillo 3s infinite alternate;
+}
 
-        p {
-            color: #e3eaf5;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
+@keyframes brillo{
+ from{filter:brightness(.8)}
+ to{filter:brightness(1.5)}
+}
 
-        /* Campo de contraseña */
-        input[type="password"] {
-            width: 100%;
-            padding: 13px;
-            margin-bottom: 15px;
-            border: 1px solid #254d70;
-            border-radius: 7px;
-            background: rgba(3, 12, 25, .9);
-            color: white;
-            text-align: center;
-            outline: none;
-            font-size: 14px;
-            transition: .3s;
-        }
+.contenedor-login{
+ width:100%;
+ max-width:390px;
+ padding:30px;
+ text-align:center;
+ background:rgba(5,15,30,.90);
+ border:1px solid rgba(0,195,255,.7);
+ border-radius:20px;
+ backdrop-filter:blur(15px);
+ box-shadow:0 0 25px #007bff55,0 0 70px #00c8ff22;
+ transition:.4s;
+ animation:tarjeta 4s infinite alternate;
+}
 
-        input[type="password"]:focus {
-            border-color: #00c8ff;
-            box-shadow: 0 0 12px rgba(0, 195, 255, .5);
-        }
+@keyframes tarjeta{
+ from{box-shadow:0 0 15px #007bff44}
+ to{box-shadow:0 0 35px #00c8ff66}
+}
 
-        input::placeholder {
-            color: #9caec0;
-        }
+.avatar-circular{
+ width:110px;
+ height:110px;
+ border-radius:50%;
+ object-fit:cover;
+ border:3px solid #00aaff;
+ box-shadow:0 0 15px #00bfff,0 0 35px #008cff66;
+ margin-bottom:12px;
+ animation:flotar 3s infinite ease-in-out;
+}
 
-        /* Botones */
-        button {
-            width: 100%;
-            padding: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            background: linear-gradient(90deg, #0066ff, #00baff);
-            border: none;
-            border-radius: 7px;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(0, 140, 255, .35);
-            transition: .3s;
-        }
+@keyframes flotar{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-9px)}
+}
 
-        button:hover {
-            transform: translateY(-3px);
-            background: linear-gradient(90deg, #008cff, #00e1ff);
-            box-shadow: 0 0 22px rgba(0, 195, 255, .7);
-        }
+h3{
+ color:#00c8ff;
+ font-size:23px;
+ margin:10px 0;
+ text-shadow:0 0 12px #008cff;
+}
 
-        button:active {
-            transform: scale(.97);
-        }
+p{
+ color:#e3eaf5;
+ font-size:14px;
+ margin-bottom:20px;
+}
 
-        /* Mensaje de error */
-        #mensajeError {
-            color: #ff6464;
-            font-size: 13px;
-            margin: 10px 0 0;
-            display: none;
-        }
+input[type=password]{
+ width:100%;
+ padding:14px;
+ margin-bottom:15px;
+ border:1px solid #254d70;
+ border-radius:8px;
+ background:#030c19;
+ color:white;
+ text-align:center;
+ outline:none;
+ font-size:15px;
+ transition:.3s;
+}
 
-        /* Panel de descargas */
-        .seccion-descargas {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
+input:focus{
+ border-color:#00eaff;
+ box-shadow:0 0 18px #00c8ff88;
+}
 
-        .carpeta-link {
-            display: block;
-            padding: 13px 15px;
-            background: rgba(0, 85, 145, .22);
-            color: #00c8ff;
-            text-decoration: none;
-            border: 1px solid #008cff;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 14px;
-            transition: .3s;
-        }
+button{
+ width:100%;
+ padding:13px;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ background:linear-gradient(90deg,#0066ff,#00baff);
+ border:none;
+ border-radius:8px;
+ cursor:pointer;
+ box-shadow:0 0 15px #008cff55;
+ transition:.3s;
+ margin-top:5px;
+}
 
-        .carpeta-link:hover {
-            background: #007bff;
-            color: white;
-            transform: translateX(5px);
-            box-shadow: 0 0 15px #008cff;
-        }
+button:hover{
+ transform:translateY(-3px);
+ background:linear-gradient(90deg,#008cff,#00eaff);
+ box-shadow:0 0 25px #00c8ff99;
+}
 
-        .pie {
-            color: rgba(255,255,255,.65);
-            font-size: 11px;
-            margin-top: 22px;
-            letter-spacing: 2px;
-        }
+button:active{transform:scale(.96)}
 
-        /* Animaciones */
-        @keyframes aparecer {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.btn-regresar{
+ background:linear-gradient(90deg,#273849,#43576b);
+ margin-top:15px;
+}
 
-        @keyframes flotar {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-7px);
-            }
-        }
+.seccion-descargas{
+ display:flex;
+ flex-direction:column;
+ gap:12px;
+ margin-top:15px;
+}
 
-        @keyframes brillo {
-            from {
-                text-shadow: 0 0 10px #00d9ff, 0 0 20px #008cff;
-            }
-            to {
-                text-shadow: 0 0 20px #00eaff, 0 0 40px #008cff;
-            }
-        }
+.carpeta-link{
+ display:block;
+ padding:14px;
+ background:#00559122;
+ color:#00c8ff;
+ text-decoration:none;
+ border:1px solid #008cff;
+ border-radius:9px;
+ font-weight:bold;
+ font-size:14px;
+ transition:.3s;
+}
 
-        /* Adaptación a celulares */
-        @media (max-width: 480px) {
-            body {
-                background-attachment: scroll;
-                padding: 20px 12px;
-            }
+.carpeta-link:hover{
+ background:#007bff;
+ color:white;
+ transform:translateX(5px);
+ box-shadow:0 0 18px #008cff;
+}
 
-            .titulo {
-                margin-bottom: 18px;
-            }
+.pie{
+ color:#ffffff88;
+ font-size:11px;
+ margin-top:22px;
+ letter-spacing:2px;
+ text-align:center;
+}
 
-            .contenedor-login {
-                max-width: 340px;
-                padding: 25px 20px;
-            }
-        }
-    </style>
+#mensajeError{
+ color:#ff6464;
+ display:none;
+}
+
+#bienvenida,#despedida{
+ display:none;
+ animation:entrada .8s ease;
+}
+
+#bienvenida h2{
+ color:#00eaff;
+ text-shadow:0 0 20px #00eaff;
+}
+
+#despedida h2{
+ color:#ff5555;
+ text-shadow:0 0 20px #ff2222;
+}
+
+.contador{
+ color:#00eaff;
+ font-size:14px;
+ font-weight:bold;
+ padding:10px;
+ border:1px solid #00c8ff55;
+ border-radius:8px;
+ background:#00aaff11;
+ margin:12px 0;
+}
+
+@keyframes desaparecer{
+ to{opacity:0;transform:scale(.85)}
+}
+
+@media(max-width:480px){
+ body{background-attachment:scroll;padding:18px 12px}
+ .contenedor-login{padding:24px 18px}
+ .titulo{margin-bottom:15px}
+}
+
+</style>
 </head>
 
 <body>
 
+<div id="particulas"></div>
+
 <div class="contenido">
 
-    <h1 class="titulo">SOPORTE TÉCNICO</h1>
+<h1 class="titulo">SOPORTE TÉCNICO</h1>
 
-    <div class="contenedor-login">
+<div class="contenedor-login">
 
-        <!-- PANTALLA DE ACCESO -->
-        <div id="pantallaLogin">
+<!-- ACCESO -->
+<div id="pantallaLogin">
 
-            <img src="logo.png"
-                 alt="Logo ElHackerLeo"
-                 class="avatar-circular">
+<img src="logo.png" class="avatar-circular" alt="Logo">
 
-            <h3>DOMINGUEZ JAIMES</h3>
+<h3>DOMINGUEZ JAIMES</h3>
+<p>Contraseña requerida</p>
 
-            <p>Contraseña requerida</p>
+<input type="password" id="inputClave"
+placeholder="Ingresa la clave" autocomplete="off">
 
-            <input
-                type="password"
-                id="inputClave"
-                placeholder="Ingresa la clave"
-                autocomplete="off"
-            >
+<button onclick="verificarClave()">🔓 DESBLOQUEAR</button>
 
-            <button onclick="verificarClave()">
-                Desbloquear
-            </button>
+<p id="mensajeError">⚠ Acceso denegado. Clave incorrecta.</p>
 
-            <p id="mensajeError">
-                ⚠ Acceso denegado. Clave incorrecta.
-            </p>
+</div>
 
-        </div>
+<!-- BIENVENIDA -->
+<div id="bienvenida">
 
-        <!-- PANEL DE DESCARGAS -->
-        <div id="pantallaDescargas" style="display:none;">
+<img src="logo.png" class="avatar-circular" alt="Logo">
 
-            <img src="logo.png"
-                 alt="Logo ElHackerLeo"
-                 class="avatar-circular">
+<h2>✨ ¡BIENVENIDO! ✨</h2>
 
-            <h3>PANEL DE DESCARGAS</h3>
+<h3>DOMINGUEZ</h3>
 
-            <p>Aplicaciones de Windows disponibles:</p>
+<p>Acceso autorizado correctamente.</p>
 
-            <div class="seccion-descargas">
+<p>Preparando tu panel de descargas.....espere</p>
 
-                <a href="https://drive.google.com/file/d/1K1I8TH8-qz4p1hYNlU6AGc1k0bBA35ev/view?usp=drive_link"
-                   class="carpeta-link"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                    🖨️ Descargar Driver HP
-                </a>
+</div>
 
-                <a href="ONLYOFFICEDesktopInstaller%20(1).exe"
-                   class="carpeta-link"
-                   download>
-                    📄 Descargar OFFICE
-                </a>
+<!-- DESCARGAS -->
+<div id="pantallaDescargas" style="display:none;">
 
-                <a href="wrar370es%20(1).exe"
-                   class="carpeta-link"
-                   download>
-                    📦 Descargar WinRAR
-                </a>
+<img src="logo.png" class="avatar-circular" alt="Logo">
 
-                <a href="2019.rar"
-                   class="carpeta-link"
-                   download>
-                    💿 Descargar OFFICE 2019
-                </a>
+<h3>PANEL DE DESCARGAS</h3>
 
-            </div>
+<p>Aplicaciones de Windows disponibles:</p>
 
-        </div>
+<div class="contador">
+⏳ Tiempo restante: <span id="tiempo">02:00</span>
+</div>
 
-    </div>
+<div class="seccion-descargas">
 
-    <div class="pie">
-        DOMINGUEZ JAIMES 84 © 2026
-    </div>
+<!-- DESCARGAS ORIGINALES CONSERVADAS -->
+
+<a href="https://drive.google.com/file/d/1K1I8TH8-qz4p1hYNlU6AGc1k0bBA35ev/view?usp=drive_link"
+class="carpeta-link" target="_blank" rel="noopener noreferrer">
+🖨️ Descargar Driver Impresora HP
+</a>
+
+<a href="ONLYOFFICEDesktopInstaller%20(1).exe"
+class="carpeta-link" download>
+📄 Descargar OFFICE
+</a>
+
+<a href="wrar370es%20(1).exe"
+class="carpeta-link" download>
+📦 Descargar WinRAR
+</a>
+
+<a href="2019.rar"
+class="carpeta-link" download>
+💿 Descargar OFFICE 2019
+</a>
+
+</div>
+
+<button class="btn-regresar" onclick="regresar()">
+⬅ REGRESAR
+</button>
+
+</div>
+
+<!-- DESPEDIDA -->
+<div id="despedida">
+
+<img src="logo.png" class="avatar-circular" alt="Logo">
+
+<h2>🔒 SESIÓN FINALIZADA</h2>
+
+<h3>¡GRACIAS POR VISITAR MI WEB!</h3>
+
+<p>El tiempo de acceso ha terminado.</p>
+
+<p>El sistema se ha bloqueado nuevamente.</p>
+
+<button onclick="volverAcceso()">🔐 VOLVER AL ACCESO</button>
+
+</div>
+
+</div>
+
+<div class="pie">
+DOMINGUEZ © 2026
+</div>
 
 </div>
 
 <script>
 
-    function verificarClave() {
+// EFECTO DE PARTICULAS
+const particulas=document.getElementById("particulas");
 
-        const password = document.getElementById('inputClave').value;
-        const mensaje = document.getElementById('mensajeError');
+for(let i=0;i<45;i++){
+ const p=document.createElement("div");
+ p.className="particula";
+ p.style.left=Math.random()*100+"%";
+ p.style.animationDuration=(5+Math.random()*10)+"s";
+ p.style.animationDelay=Math.random()*8+"s";
+ p.style.opacity=Math.random();
+ particulas.appendChild(p);
+}
 
-        if (password === '2004') {
+// VARIABLES DEL SISTEMA
+let intervalo=null;
+let tiempoRestante=120;
 
-            document.getElementById('pantallaLogin').style.display = 'none';
+// FUNCION DESBLOQUEAR
+function verificarClave(){
 
-            document.getElementById('pantallaDescargas').style.display = 'block';
+ const password=document.getElementById("inputClave").value;
+ const mensaje=document.getElementById("mensajeError");
 
-            mensaje.style.display = 'none';
+ if(password==="2004"){
 
-        } else {
+ mensaje.style.display="none";
 
-            mensaje.style.display = 'block';
+ document.getElementById("pantallaLogin").style.display="none";
+ document.getElementById("bienvenida").style.display="block";
 
-            document.getElementById('inputClave').value = '';
+ // EFECTO DE BIENVENIDA
+ setTimeout(function(){
 
-        }
+ document.getElementById("bienvenida").style.display="none";
+ document.getElementById("pantallaDescargas").style.display="block";
 
-    }
+ iniciarTemporizador();
 
-    // Permitir desbloquear presionando ENTER
-    document.getElementById('inputClave').addEventListener('keydown', function(event) {
+ },2500);
 
-        if (event.key === 'Enter') {
-            verificarClave();
-        }
+ }else{
 
-    });
+ mensaje.style.display="block";
+ document.getElementById("inputClave").value="";
+
+ }
+
+}
+
+// TEMPORIZADOR DE 2 MINUTOS
+function iniciarTemporizador(){
+
+ clearInterval(intervalo);
+
+ tiempoRestante=120;
+ actualizarTiempo();
+
+ intervalo=setInterval(function(){
+
+ tiempoRestante--;
+ actualizarTiempo();
+
+ if(tiempoRestante<=0){
+ clearInterval(intervalo);
+ finalizarSesion();
+ }
+
+ },1000);
+
+}
+
+// MOSTRAR CONTADOR
+function actualizarTiempo(){
+
+ const minutos=Math.floor(tiempoRestante/60);
+ const segundos=tiempoRestante%60;
+
+ document.getElementById("tiempo").textContent=
+ String(minutos).padStart(2,"0")+":"+
+ String(segundos).padStart(2,"0");
+
+}
+
+// REGRESAR MANUALMENTE
+function regresar(){
+
+ clearInterval(intervalo);
+
+ document.getElementById("pantallaDescargas").style.display="none";
+ document.getElementById("pantallaLogin").style.display="block";
+
+ document.getElementById("inputClave").value="";
+
+}
+
+// FINALIZAR SESION
+function finalizarSesion(){
+
+ document.getElementById("pantallaDescargas").style.display="none";
+ document.getElementById("despedida").style.display="block";
+
+ // DESPEDIDA DURANTE 4 SEGUNDOS
+ setTimeout(function(){
+ volverAcceso();
+ },4000);
+
+}
+
+// VOLVER AL ACCESO
+function volverAcceso(){
+
+ clearInterval(intervalo);
+
+ document.getElementById("despedida").style.display="none";
+ document.getElementById("bienvenida").style.display="none";
+ document.getElementById("pantallaDescargas").style.display="none";
+
+ document.getElementById("pantallaLogin").style.display="block";
+
+ document.getElementById("inputClave").value="";
+ document.getElementById("mensajeError").style.display="none";
+
+}
+
+// ENTER PARA DESBLOQUEAR
+document.getElementById("inputClave")
+.addEventListener("keydown",function(event){
+
+ if(event.key==="Enter"){
+ verificarClave();
+ }
+
+});
 
 </script>
 
