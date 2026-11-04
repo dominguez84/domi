@@ -1,153 +1,385 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-   5     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-6     <title>elhackerleo</title>
-7     <link rel="icon" type="image/png" href="logo.png">
-8     <style>
-9           body {
-            background-image: url('fondo.png.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#050b12">
+    <title>ElHackerLeo | Acceso privado</title>
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background:
+                linear-gradient(rgba(0, 8, 15, .35), rgba(0, 8, 15, .55)),
+                url('fondo.png.jpg') center center / cover fixed no-repeat;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* Efecto de iluminación */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at center,
+                transparent 10%, rgba(0, 0, 0, .55) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
+        .contenido {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: aparecer 1.2s ease;
+        }
 
-        .contenedor-login {
-            background-color: rgba(20, 25, 35, 0.85);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+        /* Título principal */
+        .titulo {
+            color: white;
+            font-family: Georgia, serif;
+            font-size: clamp(42px, 8vw, 68px);
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 22px;
             text-align: center;
-            width: 350px;
+            text-shadow:
+                0 0 10px #00d9ff,
+                0 0 25px #008cff,
+                0 4px 10px black;
+            animation: brillo 3s infinite alternate;
         }
 
+        /* Tarjeta de acceso */
+        .contenedor-login {
+            width: 100%;
+            max-width: 370px;
+            padding: 30px;
+            text-align: center;
+            background: rgba(9, 19, 32, .91);
+            border: 1px solid rgba(0, 195, 255, .65);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow:
+                0 0 15px rgba(0, 174, 255, .35),
+                0 0 45px rgba(0, 174, 255, .15),
+                0 15px 40px rgba(0, 0, 0, .7);
+            transition: .4s;
+        }
+
+        .contenedor-login:hover {
+            box-shadow:
+                0 0 25px rgba(0, 195, 255, .6),
+                0 0 60px rgba(0, 100, 255, .25);
+        }
+
+        /* Logo */
         .avatar-circular {
-            width: 100px;
-            height: 100px;
+            width: 105px;
+            height: 105px;
             border-radius: 50%;
-            border: 3px solid #007bff;
-            margin-bottom: 15px;
+            object-fit: cover;
+            border: 3px solid #008cff;
+            box-shadow:
+                0 0 12px #00bfff,
+                0 0 25px rgba(0, 140, 255, .5);
+            margin-bottom: 12px;
+            animation: flotar 3s ease-in-out infinite;
         }
 
         h3 {
-            color: #007bff;
-            margin-bottom: 10px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #00aaff;
+            font-size: 23px;
+            margin: 10px 0 12px;
+            text-shadow: 0 0 10px rgba(0, 150, 255, .5);
         }
 
         p {
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e3eaf5;
             font-size: 14px;
+            margin-bottom: 20px;
         }
 
+        /* Campo de contraseña */
         input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 13px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+            border: 1px solid #254d70;
+            border-radius: 7px;
+            background: rgba(3, 12, 25, .9);
+            color: white;
             text-align: center;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
         }
 
+        input[type="password"]:focus {
+            border-color: #00c8ff;
+            box-shadow: 0 0 12px rgba(0, 195, 255, .5);
+        }
+
+        input::placeholder {
+            color: #9caec0;
+        }
+
+        /* Botones */
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
+            padding: 12px;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-size: 16px;
             font-weight: bold;
+            background: linear-gradient(90deg, #0066ff, #00baff);
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(0, 140, 255, .35);
+            transition: .3s;
         }
 
         button:hover {
-            background-color: #0056b3;
+            transform: translateY(-3px);
+            background: linear-gradient(90deg, #008cff, #00e1ff);
+            box-shadow: 0 0 22px rgba(0, 195, 255, .7);
         }
 
+        button:active {
+            transform: scale(.97);
+        }
+
+        /* Mensaje de error */
+        #mensajeError {
+            color: #ff6464;
+            font-size: 13px;
+            margin: 10px 0 0;
+            display: none;
+        }
+
+        /* Panel de descargas */
         .seccion-descargas {
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .carpeta-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #1c2434;
-            color: #007bff;
+            display: block;
+            padding: 13px 15px;
+            background: rgba(0, 85, 145, .22);
+            color: #00c8ff;
             text-decoration: none;
-            border-radius: 5px;
+            border: 1px solid #008cff;
+            border-radius: 8px;
             font-weight: bold;
-            transition: background-color 0.3s;
-            border: 1px solid #007bff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            transition: .3s;
         }
 
         .carpeta-link:hover {
-            background-color: #334155;
+            background: #007bff;
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 0 15px #008cff;
+        }
+
+        .pie {
+            color: rgba(255,255,255,.65);
+            font-size: 11px;
+            margin-top: 22px;
+            letter-spacing: 2px;
+        }
+
+        /* Animaciones */
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+        @keyframes brillo {
+            from {
+                text-shadow: 0 0 10px #00d9ff, 0 0 20px #008cff;
+            }
+            to {
+                text-shadow: 0 0 20px #00eaff, 0 0 40px #008cff;
+            }
+        }
+
+        /* Adaptación a celulares */
+        @media (max-width: 480px) {
+            body {
+                background-attachment: scroll;
+                padding: 20px 12px;
+            }
+
+            .titulo {
+                margin-bottom: 18px;
+            }
+
+            .contenedor-login {
+                max-width: 340px;
+                padding: 25px 20px;
+            }
         }
     </style>
 </head>
+
 <body>
 
+<div class="contenido">
+
+    <h1 class="titulo">AL FIN</h1>
+
     <div class="contenedor-login">
-        <!-- PANTALLA DE INICIO DE SESIÓN -->
+
+        <!-- PANTALLA DE ACCESO -->
         <div id="pantallaLogin">
-            <img src="logo.png" alt="Avatar" class="avatar-circular">
+
+            <img src="logo.png"
+                 alt="Logo ElHackerLeo"
+                 class="avatar-circular">
+
             <h3>elhackerleo</h3>
+
             <p>Contraseña requerida</p>
-            <input type="password" id="inputClave" placeholder="Ingresa la clave">
-            <button onclick="verificarClave()">Desbloquear</button>
+
+            <input
+                type="password"
+                id="inputClave"
+                placeholder="Ingresa la clave"
+                autocomplete="off"
+            >
+
+            <button onclick="verificarClave()">
+                Desbloquear
+            </button>
+
+            <p id="mensajeError">
+                ⚠ Acceso denegado. Clave incorrecta.
+            </p>
+
         </div>
 
-        <!-- PANTALLA DE DESCARGAS -->
-        <div id="pantallaDescargas" style="display: none;">
-            <img src="logo.png" alt="Avatar" class="avatar-circular">
+        <!-- PANEL DE DESCARGAS -->
+        <div id="pantallaDescargas" style="display:none;">
+
+            <img src="logo.png"
+                 alt="Logo ElHackerLeo"
+                 class="avatar-circular">
+
             <h3>PANEL DE DESCARGAS</h3>
+
             <p>Aplicaciones de Windows disponibles:</p>
-            
-                             <div class="seccion-descargas">
-                <a href="https://drive.google.com/file/d/1K1I8TH8-qz4p1hYNlU6AGc1k0bBA35ev/view?usp=drive_link" class="carpeta-link" target="_blank">🖨️ Descargar Driver HP</a>
-                <a href="ONLYOFFICEDesktopInstaller%20(1).exe" class="carpeta-link" download>📄 Descargar OFFICE</a>
-                <a href="wrar370es%20(1).exe" class="carpeta-link" download>📦 Descargar WinRAR</a>
-                <a href="2019.rar" class="carpeta-link" download>💿 Descargar OFFICE 2019</a>
+
+            <div class="seccion-descargas">
+
+                <a href="https://drive.google.com/file/d/1K1I8TH8-qz4p1hYNlU6AGc1k0bBA35ev/view?usp=drive_link"
+                   class="carpeta-link"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    🖨️ Descargar Driver HP
+                </a>
+
+                <a href="ONLYOFFICEDesktopInstaller%20(1).exe"
+                   class="carpeta-link"
+                   download>
+                    📄 Descargar OFFICE
+                </a>
+
+                <a href="wrar370es%20(1).exe"
+                   class="carpeta-link"
+                   download>
+                    📦 Descargar WinRAR
+                </a>
+
+                <a href="2019.rar"
+                   class="carpeta-link"
+                   download>
+                    💿 Descargar OFFICE 2019
+                </a>
 
             </div>
 
-
         </div>
+
     </div>
 
-    <script>
-        function verificarClave() {
-            var password = document.getElementById('inputClave').value;
-            
-            if (password === '2004') {
-                document.getElementById('pantallaLogin').style.display = 'none';
-                document.getElementById('pantallaDescargas').style.display = 'block';
-            } else {
-                alert('Acceso denegado. Clave incorrecta.');
-                document.getElementById('inputClave').value = '';
-            }
+    <div class="pie">
+        ELHACKERLEO © 2026
+    </div>
+
+</div>
+
+<script>
+
+    function verificarClave() {
+
+        const password = document.getElementById('inputClave').value;
+        const mensaje = document.getElementById('mensajeError');
+
+        if (password === '2004') {
+
+            document.getElementById('pantallaLogin').style.display = 'none';
+
+            document.getElementById('pantallaDescargas').style.display = 'block';
+
+            mensaje.style.display = 'none';
+
+        } else {
+
+            mensaje.style.display = 'block';
+
+            document.getElementById('inputClave').value = '';
+
         }
-    </script>
+
+    }
+
+    // Permitir desbloquear presionando ENTER
+    document.getElementById('inputClave').addEventListener('keydown', function(event) {
+
+        if (event.key === 'Enter') {
+            verificarClave();
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
